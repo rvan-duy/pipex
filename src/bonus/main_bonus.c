@@ -6,7 +6,7 @@
 /*   By: rvan-duy <rvan-duy@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/07/18 17:15:11 by rvan-duy      #+#    #+#                 */
-/*   Updated: 2021/07/21 13:26:48 by rvan-duy      ########   odam.nl         */
+/*   Updated: 2021/07/21 15:38:48 by rvan-duy      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,15 @@ static int	**create_pipes(int pipes_amount_needed)
 
 int	main(int argc, char **argv, char **envp)
 {
-	int	**pipefds;
+	int							**pipefds;
+	t_command_line_arguments	arg;
 
-	check_argument_count(argc);
-	pipefds = create_pipes(argc - 1);
-	handle_processes(argc, argv, pipefds, envp);
+	arg.argument_count = argc;
+	arg.argument_vector = argv;
+	arg.enviroment_variables = envp;
+	check_argument_count(arg.argument_count);
+	pipefds = create_pipes(arg.argument_count - 1);
+	handle_processes(&arg, pipefds);
 	ft_array_free((void **)pipefds, ft_array_len((void **)pipefds));
 	return (EXIT_SUCCESS);
 }

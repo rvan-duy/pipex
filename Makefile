@@ -6,7 +6,7 @@
 #    By: rvan-duy <rvan-duy@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/06/04 15:34:09 by rvan-duy      #+#    #+#                  #
-#    Updated: 2021/07/21 22:39:49 by rvan-duy      ########   odam.nl          #
+#    Updated: 2021/07/21 22:47:13 by rvan-duy      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,13 +25,13 @@ SRC			= main.c \
 				utilities_1.c \
 				utilities_2.c
 
-SRC_BONUS	= bonus/main_bonus.c \
-				read_and_error_check_command.c \
-				bonus/handle_processes_bonus.c \
-				find_absolute_path_to_command.c \
-				bonus/execute_command_bonus.c \
-				bonus/utilities_1_bonus.c \
-				bonus/utilities_2_bonus.c
+SRC_BONUS	= main_bonus.c \
+				read_and_error_check_command_bonus.c \
+				handle_processes_bonus.c \
+				find_absolute_path_to_command_bonus.c \
+				execute_command_bonus.c \
+				utilities_1_bonus.c \
+				utilities_2_bonus.c
 
 LIBFT	= libft/libft.a
 
@@ -42,7 +42,7 @@ NOCOLOR	= \033[0m
 COLOR	= \033[32m
 
 SRCS 		= $(addprefix src/, $(SRC))
-SRCS_BONUS	= $(addprefix src/, $(SRC_BONUS))
+SRCS_BONUS	= $(addprefix src/bonus/, $(SRC_BONUS))
 OBJS		= $(SRCS:src/%.c=obj/%.o)
 OBJS_BONUS	= $(SRCS_BONUS:src/%.c=obj/%.o)
 

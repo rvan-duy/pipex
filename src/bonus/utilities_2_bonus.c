@@ -6,7 +6,7 @@
 /*   By: rvan-duy <rvan-duy@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/26 21:38:20 by rvan-duy      #+#    #+#                 */
-/*   Updated: 2021/07/21 12:47:21 by rvan-duy      ########   odam.nl         */
+/*   Updated: 2021/07/21 15:47:40 by rvan-duy      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,6 @@ void	dup_fd(int fd1, int fd2)
 		exit(EXIT_FAILURE);
 	}
 }
-
-#include <stdio.h>
 
 void	close_other_fds(int **pipefds, int fd1, int fd2)
 {

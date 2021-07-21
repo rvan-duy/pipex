@@ -6,7 +6,7 @@
 #    By: rvan-duy <rvan-duy@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/06/04 15:34:09 by rvan-duy      #+#    #+#                  #
-#    Updated: 2021/07/18 21:13:46 by rvan-duy      ########   odam.nl          #
+#    Updated: 2021/07/21 22:39:49 by rvan-duy      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,8 +35,8 @@ SRC_BONUS	= bonus/main_bonus.c \
 
 LIBFT	= libft/libft.a
 
-OBJ_DIR 	= obj \
-				obj/bonus
+OBJ_DIR 		= obj
+OBJ_DIR_BONUS	= obj/bonus
 
 NOCOLOR	= \033[0m
 COLOR	= \033[32m
@@ -51,17 +51,21 @@ all: $(NAME)
 bonus: $(NAME_BONUS)
 
 obj/%.o: src/%.c
-	@mkdir -p $(OBJ_DIR)
-	@$(CC) $(FLAGS) $(HEADER) $(HEADER_BONUS) -c $< -o $@
+	mkdir -p $(OBJ_DIR)
+	$(CC) $(FLAGS) $(HEADER) -c $< -o $@
+
+obj/bonus/%.o: src/bonus/%.c
+	mkdir -p $(OBJ_DIR_BONUS)
+	$(CC) $(FLAGS) $(HEADER_BONUS) -c $< -o $@
 
 $(NAME): $(OBJS)
 	@make -C libft
-	@$(CC) $(FLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+	$(CC) $(FLAGS) $(OBJS) $(LIBFT) -o $(NAME)
 	@echo "$(COLOR)Creating object files and the executable. ($(NAME))$(NOCOLOR)"
 
 $(NAME_BONUS): $(OBJS_BONUS)
 	@make -C libft
-	@$(CC) $(FLAGS) $(OBJS_BONUS) $(LIBFT) -o $(NAME_BONUS)
+	$(CC) $(FLAGS) $(OBJS_BONUS) $(LIBFT) -o $(NAME_BONUS)
 	@echo "$(COLOR)Creating bonus object files and the executable. ($(NAME_BONUS))$(NOCOLOR)"
 
 clean:

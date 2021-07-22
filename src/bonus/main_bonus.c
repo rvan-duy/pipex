@@ -6,7 +6,7 @@
 /*   By: rvan-duy <rvan-duy@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/07/18 17:15:11 by rvan-duy      #+#    #+#                 */
-/*   Updated: 2021/07/21 15:38:48 by rvan-duy      ########   odam.nl         */
+/*   Updated: 2021/07/22 10:55:07 by rvan-duy      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,16 @@
 #include "utilities_bonus.h"
 #include "libft.h"
 
-static void	check_argument_count(int argc)
+static void	check_argument_count(int argc, char **argv)
 {
-	if (argc < 5)
-		error_and_exit("Usage: ./pipex <infile> \
+	if (ft_strncmp(argv[1], "here_doc", 8) == 0)
+	{
+		if (argc != 6)
+			error_and_exit("Heredoc usage: ./pipex_bonus here_doc LIMITER \
+<cmd1> <cmd2> <outfile>");
+	}
+	else if (argc < 5)
+		error_and_exit("Usage: ./pipex_bonus <infile> \
 <cmd1> <cmd2> ... <cmdn> <outfile>");
 }
 
@@ -54,7 +60,7 @@ int	main(int argc, char **argv, char **envp)
 	arg.argument_count = argc;
 	arg.argument_vector = argv;
 	arg.enviroment_variables = envp;
-	check_argument_count(arg.argument_count);
+	check_argument_count(arg.argument_count, arg.argument_vector);
 	pipefds = create_pipes(arg.argument_count - 1);
 	handle_processes(&arg, pipefds);
 	ft_array_free((void **)pipefds, ft_array_len((void **)pipefds));

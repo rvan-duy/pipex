@@ -6,7 +6,7 @@
 #    By: rvan-duy <rvan-duy@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/06/04 15:34:09 by rvan-duy      #+#    #+#                  #
-#    Updated: 2021/07/22 10:38:48 by rvan-duy      ########   odam.nl          #
+#    Updated: 2021/07/23 11:54:58 by rvan-duy      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRC			= main.c \
 SRC_BONUS	= main_bonus.c \
 				read_and_error_check_command_bonus.c \
 				handle_processes_bonus.c \
+				handle_heredoc_bonus.c \
 				find_absolute_path_to_command_bonus.c \
 				execute_command_bonus.c \
 				utilities_1_bonus.c \

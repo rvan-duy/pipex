@@ -6,7 +6,7 @@
 /*   By: rvan-duy <rvan-duy@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/07/18 17:20:55 by rvan-duy      #+#    #+#                 */
-/*   Updated: 2021/07/21 15:46:18 by rvan-duy      ########   odam.nl         */
+/*   Updated: 2021/07/24 18:42:17 by rvan-duy      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,10 @@ static void	wait_for_all_processes(int command_count)
 
 void	handle_processes(t_command_line_arguments *arg, int **pipefds)
 {
+	const int	command_count = arg->argument_count - 3;
 	int			i;
 	pid_t		pid;
 	int			files[2];
-	const int	command_count = arg->argument_count - 3;
 
 	open_files(files, arg->argument_vector, arg->argument_count);
 	i = 0;

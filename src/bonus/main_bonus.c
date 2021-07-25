@@ -6,7 +6,7 @@
 /*   By: rvan-duy <rvan-duy@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/07/18 17:15:11 by rvan-duy      #+#    #+#                 */
-/*   Updated: 2021/07/23 12:04:36 by rvan-duy      ########   odam.nl         */
+/*   Updated: 2021/07/25 13:25:46 by rvan-duy      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	check_argument_count(int argc, char **argv)
 {
 	if (argc >= 2)
 	{
-		if (ft_strncmp(argv[1], "here_doc", ft_strlen(argv[1])) == 0)
+		if (ft_strncmp(argv[1], "here_doc", 9) == 0)
 		{
 			if (argc != 6)
 				error_and_exit("Heredoc usage: ./pipex_bonus here_doc LIMITER \
@@ -71,8 +71,7 @@ int	main(int argc, char **argv, char **envp)
 
 	init_struct(&arg, argc, argv, envp);
 	check_argument_count(arg.argument_count, arg.argument_vector);
-	if (ft_strncmp(arg.argument_vector[1], "here_doc", \
-		ft_strlen(arg.argument_vector[1])) == 0)
+	if (ft_strncmp(arg.argument_vector[1], "here_doc", 9) == 0)
 	{
 		pipefds = create_pipes(arg.argument_count - 2);
 		handle_heredoc(&arg, pipefds);

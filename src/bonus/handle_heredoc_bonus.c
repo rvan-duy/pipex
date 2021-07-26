@@ -6,7 +6,7 @@
 /*   By: rvan-duy <rvan-duy@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/07/23 10:17:31 by rvan-duy      #+#    #+#                 */
-/*   Updated: 2021/07/26 19:38:55 by rvan-duy      ########   odam.nl         */
+/*   Updated: 2021/07/26 22:40:51 by rvan-duy      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,10 @@ static void	read_heredoc(t_command_line_arguments *arg, int **pipefds)
 		if (ret <= 0)
 			exit_get_next_line_error(ret, limiter, line);
 		if (ft_strncmp(line, limiter, ft_strlen(limiter) + 1) != 0)
+		{
 			write(pipefds[0][WRITE_PIPE], line, ft_strlen(line));
+			write(pipefds[0][WRITE_PIPE], "\n", 1);
+		}
 		else
 			found_limiter = true;
 		free(line);
@@ -82,6 +85,7 @@ void	handle_heredoc(t_command_line_arguments *arg, int **pipefds)
 	int			i;
 	pid_t		pid;
 	int			outfile;
+	int			tmp_file;
 
 	read_heredoc(arg, pipefds);
 	outfile = open_file_with_write_permissions(arg->argument_vector[out_index]);

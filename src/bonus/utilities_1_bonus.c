@@ -6,7 +6,7 @@
 /*   By: rvan-duy <rvan-duy@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/20 00:17:36 by rvan-duy      #+#    #+#                 */
-/*   Updated: 2021/07/18 21:06:12 by rvan-duy      ########   odam.nl         */
+/*   Updated: 2021/07/26 22:17:16 by rvan-duy      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	open_file_with_write_permissions(char *argv)
 {
 	int	file_descriptor;
 
-	file_descriptor = open(argv, O_WRONLY | O_TRUNC | O_CREAT, 0644);
+	file_descriptor = open(argv, O_WRONLY | O_APPEND | O_CREAT, 0644);
 	if (file_descriptor == -1)
 	{
 		ft_putstr_fd(argv, 2);

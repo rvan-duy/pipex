@@ -6,7 +6,7 @@
 /*   By: rvan-duy <rvan-duy@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/07/23 10:17:31 by rvan-duy      #+#    #+#                 */
-/*   Updated: 2021/07/24 19:11:20 by rvan-duy      ########   odam.nl         */
+/*   Updated: 2021/07/26 19:38:55 by rvan-duy      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void	read_heredoc(t_command_line_arguments *arg, int **pipefds)
 		ret = get_next_line(STDIN_FILENO, &line);
 		if (ret <= 0)
 			exit_get_next_line_error(ret, limiter, line);
-		if (ft_strncmp(line, limiter, ft_strlen(limiter)) != 0)
+		if (ft_strncmp(line, limiter, ft_strlen(limiter) + 1) != 0)
 			write(pipefds[0][WRITE_PIPE], line, ft_strlen(line));
 		else
 			found_limiter = true;

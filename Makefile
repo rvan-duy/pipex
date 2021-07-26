@@ -6,7 +6,7 @@
 #    By: rvan-duy <rvan-duy@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/06/04 15:34:09 by rvan-duy      #+#    #+#                  #
-#    Updated: 2021/07/23 11:54:58 by rvan-duy      ########   odam.nl          #
+#    Updated: 2021/07/25 13:38:56 by rvan-duy      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,25 +60,25 @@ obj/bonus/%.o: src/bonus/%.c
 	@$(CC) $(FLAGS) $(HEADER_BONUS) -c $< -o $@
 
 $(NAME): $(OBJS)
+	@echo "$(COLOR)Creating object files and the executable. ($(NAME))$(NOCOLOR)"
 	@make -C libft
 	@$(CC) $(FLAGS) $(OBJS) $(LIBFT) -o $(NAME)
-	@echo "$(COLOR)Creating object files and the executable. ($(NAME))$(NOCOLOR)"
 
 $(NAME_BONUS): $(OBJS_BONUS)
+	@echo "$(COLOR)Creating bonus object files and the executable. ($(NAME_BONUS))$(NOCOLOR)"
 	@make -C libft
 	@$(CC) $(FLAGS) $(OBJS_BONUS) $(LIBFT) -o $(NAME_BONUS)
-	@echo "$(COLOR)Creating bonus object files and the executable. ($(NAME_BONUS))$(NOCOLOR)"
 
 clean:
-	@/bin/rm -f $(OBJ)
+	@echo "$(COLOR)Removing object files.$(NOCOLOR)"
+	@/bin/rm -f $(OBJS) $(OBJS_BONUS)
 	@/bin/rm -f .DS_Store
 	@/bin/rm -f a.out
-	@echo "$(COLOR)Removing object files.$(NOCOLOR)"
 
 fclean: clean
+	@echo "$(COLOR)Removing executable and object directories.$(NOCOLOR)"
 	@/bin/rm -f $(NAME) $(NAME_BONUS)
 	@/bin/rm -rf $(OBJ_DIR)
-	@echo "$(COLOR)Removing executable and object directories.$(NOCOLOR)"
 
 re: fclean all
 

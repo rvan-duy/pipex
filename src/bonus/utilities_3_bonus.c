@@ -1,18 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   read_and_error_check_command_bonus.h               :+:    :+:            */
+/*   utilities_3_bonus.c                                :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rvan-duy <rvan-duy@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/06/26 21:44:39 by rvan-duy      #+#    #+#                 */
-/*   Updated: 2021/07/27 10:57:51 by rvan-duy      ########   odam.nl         */
+/*   Created: 2021/07/27 10:34:40 by rvan-duy      #+#    #+#                 */
+/*   Updated: 2021/07/27 10:37:26 by rvan-duy      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef READ_AND_ERROR_CHECK_COMMAND_BONUS_H
-# define READ_AND_ERROR_CHECK_COMMAND_BONUS_H
+#include "utilities_bonus.h"
+#include "libft.h"
 
-char	**read_and_error_check_command(char *argument, char **envp);
+int	open_tmp_file(char *name)
+{
+	int	file_descriptor;
 
-#endif
+	file_descriptor = open(name, O_WRONLY | O_TRUNC | O_CREAT, 0644);
+	if (file_descriptor == -1)
+	{
+		ft_putstr_fd(name, 2);
+		ft_putstr_fd(": ", 2);
+		perror("");
+		exit(EXIT_FAILURE);
+	}
+	return (file_descriptor);
+}

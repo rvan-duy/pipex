@@ -6,7 +6,7 @@
 #    By: rvan-duy <rvan-duy@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/06/04 15:34:09 by rvan-duy      #+#    #+#                  #
-#    Updated: 2021/07/25 13:38:56 by rvan-duy      ########   odam.nl          #
+#    Updated: 2021/07/27 10:35:42 by rvan-duy      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,8 @@ SRC_BONUS	= main_bonus.c \
 				find_absolute_path_to_command_bonus.c \
 				execute_command_bonus.c \
 				utilities_1_bonus.c \
-				utilities_2_bonus.c
+				utilities_2_bonus.c \
+				utilities_3_bonus.c
 
 LIBFT	= libft/libft.a
 

@@ -6,7 +6,7 @@
 /*   By: rvan-duy <rvan-duy@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/07/18 17:20:55 by rvan-duy      #+#    #+#                 */
-/*   Updated: 2021/07/24 18:42:17 by rvan-duy      ########   odam.nl         */
+/*   Updated: 2021/07/27 10:28:49 by rvan-duy      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ static void	open_files(int *files, char **argv, int argc)
 	const int	in_file = 1;
 	const int	out_file = argc - 1;
 
-	files[0] = open_file_with_read_permissions(argv[in_file]);
-	files[1] = open_file_with_write_permissions(argv[out_file]);
+	files[0] = open_file_with_read_perms(argv[in_file]);
+	files[1] = open_file_with_write_perms(argv[out_file]);
 }
 
 static void	close_everything(int *files, int **pipefds)

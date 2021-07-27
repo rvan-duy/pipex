@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   find_absolute_path_to_command.h                    :+:    :+:            */
+/*   find_absolute_path_to_command_bonus.h              :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rvan-duy <rvan-duy@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/26 21:36:22 by rvan-duy      #+#    #+#                 */
-/*   Updated: 2021/07/07 10:33:23 by rvan-duy      ########   odam.nl         */
+/*   Updated: 2021/07/27 10:58:27 by rvan-duy      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FIND_ABSOLUTE_PATH_TO_COMMAND_H
-# define FIND_ABSOLUTE_PATH_TO_COMMAND_H
+#ifndef FIND_ABSOLUTE_PATH_TO_COMMAND_BONUS_H
+# define FIND_ABSOLUTE_PATH_TO_COMMAND_BONUS_H
 
 # define ABSOLUTE_COMMAND '/'
 

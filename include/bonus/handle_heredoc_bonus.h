@@ -6,7 +6,7 @@
 /*   By: rvan-duy <rvan-duy@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/07/23 10:18:24 by rvan-duy      #+#    #+#                 */
-/*   Updated: 2021/07/24 11:05:37 by rvan-duy      ########   odam.nl         */
+/*   Updated: 2021/07/27 10:54:04 by rvan-duy      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 # include "structs_bonus.h"
 # include <stdbool.h>
+
+# define TMP_FILE 0
+# define OUT_FILE 1
 
 void	handle_heredoc(t_command_line_arguments *arg, int **pipefds);
 

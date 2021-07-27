@@ -6,7 +6,7 @@
 /*   By: rvan-duy <rvan-duy@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/20 00:17:36 by rvan-duy      #+#    #+#                 */
-/*   Updated: 2021/07/26 22:17:16 by rvan-duy      ########   odam.nl         */
+/*   Updated: 2021/07/27 10:34:55 by rvan-duy      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ pid_t	fork_process(void)
 	return (pid);
 }
 
-int	open_file_with_read_permissions(char *argv)
+int	open_file_with_read_perms(char *argv)
 {
 	int	file_descriptor;
 
@@ -64,7 +64,7 @@ int	open_file_with_read_permissions(char *argv)
 	return (file_descriptor);
 }
 
-int	open_file_with_write_permissions(char *argv)
+int	open_file_with_write_perms(char *argv)
 {
 	int	file_descriptor;
 

@@ -6,7 +6,7 @@
 /*   By: rvan-duy <rvan-duy@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/07/23 10:17:31 by rvan-duy      #+#    #+#                 */
-/*   Updated: 2021/07/26 22:40:51 by rvan-duy      ########   odam.nl         */
+/*   Updated: 2021/07/27 10:57:05 by rvan-duy      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,21 @@
 #include "libft.h"
 
 static void	execute_heredoc_child_processes(t_command_line_arguments *arg, \
-								int command_index, int **pipefds, int outfile)
+								int command_index, int **pipefds, int *files)
 {
+	const int	first_command_index = 0;
 	const int	last_command_index = 1;
 
-	if (command_index == last_command_index)
-		dup_fd(outfile, pipefds[command_index + 1][WRITE_PIPE]);
-	close_fd(outfile);
+	if (command_index == first_command_index)
+	{
+		files[TMP_FILE] = open_file_with_read_perms("/tmp/tmp_file");
+		unlink("/tmp/tmp_file");
+		dup_fd(files[0], pipefds[command_index][READ_PIPE]);
+		close_fd(files[0]);
+	}
+	else if (command_index == last_command_index)
+		dup_fd(files[1], pipefds[command_index + 1][WRITE_PIPE]);
+	close_fd(files[1]);
 	close_other_fds(pipefds, pipefds[command_index][READ_PIPE], \
 		pipefds[command_index + 1][WRITE_PIPE]);
 	execute_next_command(pipefds[command_index][READ_PIPE], \
@@ -46,7 +54,7 @@ static void	exit_get_next_line_error(int ret, const char *limiter, char *line)
 		error_and_exit("Get_next_line failed.");
 }
 
-static void	read_heredoc(t_command_line_arguments *arg, int **pipefds)
+static void	read_heredoc(t_command_line_arguments *arg, int tmp_file)
 {
 	const char	*limiter = arg->argument_vector[2];
 	bool		found_limiter;
@@ -63,13 +71,14 @@ static void	read_heredoc(t_command_line_arguments *arg, int **pipefds)
 			exit_get_next_line_error(ret, limiter, line);
 		if (ft_strncmp(line, limiter, ft_strlen(limiter) + 1) != 0)
 		{
-			write(pipefds[0][WRITE_PIPE], line, ft_strlen(line));
-			write(pipefds[0][WRITE_PIPE], "\n", 1);
+			write(tmp_file, line, ft_strlen(line));
+			write(tmp_file, "\n", 1);
 		}
 		else
 			found_limiter = true;
 		free(line);
 	}
+	close_fd(tmp_file);
 }
 
 static void	close_heredoc_everything(int outfile, int **pipefds)
@@ -81,23 +90,22 @@ static void	close_heredoc_everything(int outfile, int **pipefds)
 void	handle_heredoc(t_command_line_arguments *arg, int **pipefds)
 {
 	const int	command_count = 2;
-	const int	out_index = 5;
 	int			i;
 	pid_t		pid;
-	int			outfile;
-	int			tmp_file;
+	int			files[2];
 
-	read_heredoc(arg, pipefds);
-	outfile = open_file_with_write_permissions(arg->argument_vector[out_index]);
+	files[OUT_FILE] = open_file_with_write_perms(arg->argument_vector[5]);
+	files[TMP_FILE] = open_tmp_file("/tmp/tmp_file");
+	read_heredoc(arg, files[TMP_FILE]);
 	i = 0;
 	while (i < command_count)
 	{
 		pid = fork_process();
 		if (pid == CHILD_PROCESS)
-			execute_heredoc_child_processes(arg, i, pipefds, outfile);
+			execute_heredoc_child_processes(arg, i, pipefds, files);
 		i++;
 	}
-	close_heredoc_everything(outfile, pipefds);
+	close_heredoc_everything(files[OUT_FILE], pipefds);
 	wait(NULL);
 	wait(NULL);
 }

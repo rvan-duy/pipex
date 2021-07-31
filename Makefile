@@ -6,14 +6,14 @@
 #    By: rvan-duy <rvan-duy@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/06/04 15:34:09 by rvan-duy      #+#    #+#                  #
-#    Updated: 2021/07/27 10:35:42 by rvan-duy      ########   odam.nl          #
+#    Updated: 2021/07/31 15:33:20 by rvan-duy      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= pipex
 NAME_BONUS	= pipex_bonus
 CC			= gcc
-FLAGS		= -Wall -Wextra -Werror -g -fsanitize=address
+FLAGS		= -Wall -Wextra -Werror -g
 HEADER		= -I include
 HEADER_BONUS= -I include/bonus
 

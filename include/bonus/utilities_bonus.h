@@ -6,7 +6,7 @@
 /*   By: rvan-duy <rvan-duy@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/23 13:23:21 by rvan-duy      #+#    #+#                 */
-/*   Updated: 2021/07/27 10:35:25 by rvan-duy      ########   odam.nl         */
+/*   Updated: 2021/07/31 17:10:59 by rvan-duy      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ pid_t	fork_process(void);
 void	close_fd(int fd);
 int		open_file_with_read_perms(char *argv);
 int		open_file_with_write_perms(char *argv);
+int		open_file_with_append_write_perms(char *argv);
 int		open_tmp_file(char *name);
 char	**combine_command(char *absolute_path, char **arguments);
 char	*get_env_variable(char *variable, char **env_variables);

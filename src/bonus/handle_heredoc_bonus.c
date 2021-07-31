@@ -6,7 +6,7 @@
 /*   By: rvan-duy <rvan-duy@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/07/23 10:17:31 by rvan-duy      #+#    #+#                 */
-/*   Updated: 2021/07/27 10:57:05 by rvan-duy      ########   odam.nl         */
+/*   Updated: 2021/07/31 17:04:15 by rvan-duy      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,14 @@ static void	execute_heredoc_child_processes(t_command_line_arguments *arg, \
 			arg->argument_vector[command_index + 3], arg->enviroment_variables);
 }
 
-static void	exit_get_next_line_error(int ret, const char *limiter, char *line)
+static void	exit_get_next_line_error(int ret, const char *limiter)
 {
-	if (line != NULL)
-		free(line);
 	if (ret == 0)
 	{
 		ft_putstr_fd("Warning: here-document delimited by end-of-file", 2);
 		ft_putstr_fd(" (wanted '", 2);
 		ft_putstr_fd(limiter, 2);
 		ft_putendl_fd("')", 2);
-		exit(EXIT_FAILURE);
 	}
 	else if (ret < 0)
 		error_and_exit("Get_next_line failed.");
@@ -57,25 +54,23 @@ static void	exit_get_next_line_error(int ret, const char *limiter, char *line)
 static void	read_heredoc(t_command_line_arguments *arg, int tmp_file)
 {
 	const char	*limiter = arg->argument_vector[2];
-	bool		found_limiter;
 	char		*line;
 	int			ret;
 
 	ret = 1;
-	found_limiter = false;
-	while (found_limiter == false)
+	while (ret > 0)
 	{
 		ft_putstr_fd("> ", 1);
 		ret = get_next_line(STDIN_FILENO, &line);
 		if (ret <= 0)
-			exit_get_next_line_error(ret, limiter, line);
-		if (ft_strncmp(line, limiter, ft_strlen(limiter) + 1) != 0)
+			exit_get_next_line_error(ret, limiter);
+		else if (ft_strncmp(line, limiter, ft_strlen(limiter) + 1) != 0)
 		{
 			write(tmp_file, line, ft_strlen(line));
 			write(tmp_file, "\n", 1);
 		}
 		else
-			found_limiter = true;
+			break ;
 		free(line);
 	}
 	close_fd(tmp_file);

@@ -6,7 +6,7 @@
 #    By: rvan-duy <rvan-duy@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/06/04 15:34:09 by rvan-duy      #+#    #+#                  #
-#    Updated: 2021/07/31 15:33:20 by rvan-duy      ########   odam.nl          #
+#    Updated: 2021/08/03 14:36:49 by rvan-duy      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,9 +37,6 @@ SRC_BONUS	= main_bonus.c \
 
 LIBFT	= libft/libft.a
 
-OBJ_DIR 		= obj
-OBJ_DIR_BONUS	= obj/bonus
-
 NOCOLOR	= \033[0m
 COLOR	= \033[32m
 
@@ -52,13 +49,13 @@ all: $(NAME)
 
 bonus: $(NAME_BONUS)
 
-obj/%.o: src/%.c
-	@mkdir -p $(OBJ_DIR)
-	@$(CC) $(FLAGS) $(HEADER) -c $< -o $@
-
 obj/bonus/%.o: src/bonus/%.c
-	@mkdir -p $(OBJ_DIR_BONUS)
+	@mkdir -p $(@D)
 	@$(CC) $(FLAGS) $(HEADER_BONUS) -c $< -o $@
+
+obj/%.o: src/%.c
+	@mkdir -p $(@D)
+	@$(CC) $(FLAGS) $(HEADER) -c $< -o $@
 
 $(NAME): $(OBJS)
 	@echo "$(COLOR)Creating object files and the executable. ($(NAME))$(NOCOLOR)"

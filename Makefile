@@ -6,7 +6,7 @@
 #    By: rvan-duy <rvan-duy@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/06/04 15:34:09 by rvan-duy      #+#    #+#                  #
-#    Updated: 2021/08/04 13:28:17 by rvan-duy      ########   odam.nl          #
+#    Updated: 2021/08/04 17:37:11 by rvan-duy      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,7 +76,7 @@ clean:
 fclean: clean
 	@echo "$(COLOR)Removing executable and object directories.$(NOCOLOR)"
 	@/bin/rm -f $(NAME) $(NAME_BONUS)
-	@/bin/rm -rf $(OBJ_DIR)
+	@/bin/rm -rf obj
 
 re: fclean all
 

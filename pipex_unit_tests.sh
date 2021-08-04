@@ -1,17 +1,70 @@
 #!/bin/bash
 
-func to execute pipex case
-func to execute real case
+###### Config Start
+PIPEX_PATH=./pipex
+INFILE=/usr/share/dict/words
+###### Config End
 
-loop to call those functions:
-    execute func1 > pipex_output
-    execute func2 > real_output
-    store in diff variable = diff pipex_output real_output
-    check if diff is ""
-    if it is, continue print test passed
-    if its not error and print with test failed, but also continue.
+# func to execute pipex case
+execute_pipex_program_1 () {
+    $PIPEX_PATH $1 "$2" "$3" out
+    cat out > pipex_output
+    rm out
+}
 
+# func to execute pipex case with 2 args for each cmd
+execute_pipex_program_2 () {
+    $PIPEX_PATH $1 "$2 $3" "$4 $5" out
+    cat out > pipex_output
+    rm out
+}
 
+# func to execute real case
+execute_real_program_1 () {
+    < $1 $2 | $3 > out
+    cat out > real_output
+    rm out
+}
 
-https://stackoverflow.com/questions/3611846/bash-using-the-result-of-a-diff-in-a-if-statement
-https://ryanstutorials.net/bash-scripting-tutorial/bash-functions.php
+# func to execute real case with 2 args for each cmd
+execute_real_program_2 () {
+    < $1 $2 $3 | $4 $5 > out
+    cat out > real_output
+    rm out
+}
+
+test_program_1 () {
+    execute_pipex_program_1 $INFILE $2 $3
+    execute_real_program_1 $INFILE $2 $3
+    DIFF=$(diff real_output pipex_output)
+    if [ "$DIFF" == "" ]; then
+        printf "\033[32mtest $1 passed\033[0m\n"
+    else
+        printf "\033[31mtest $1 failed\033[0m\n"
+        cat pipex_output > pipex_output_error_$1
+        cat real_output > real_output_error_$1
+    fi
+    rm pipex_output real_output
+}
+
+test_program_2 () {
+    execute_pipex_program_2 $INFILE $2 $3 $4 $5
+    execute_real_program_2 $INFILE $2 $3 $4 $5
+    DIFF=$(diff real_output pipex_output)
+    if [ "$DIFF" == "" ]; then
+        printf "\033[32mtest $1 passed\033[0m\n"
+    else
+        printf "\033[31mtest $1 failed\033[0m\n"
+        cat pipex_output > pipex_output_error_$1
+        cat real_output > real_output_error_$1
+    fi
+    rm pipex_output real_output
+}
+
+# test_program test_number cmd1 cmd2
+test_program_2 1 cat -e wc -l
+test_program_1 2 cat wc
+test_program_1 3 wc cat
+test_program_1 4 wc wc
+test_program_1 5 echo echo
+test_program_2 6 wc -c wc -c

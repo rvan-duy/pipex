@@ -6,7 +6,7 @@
 #    By: rvan-duy <rvan-duy@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/06/04 15:34:09 by rvan-duy      #+#    #+#                  #
-#    Updated: 2021/08/03 14:36:49 by rvan-duy      ########   odam.nl          #
+#    Updated: 2021/08/04 13:28:17 by rvan-duy      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,14 +58,14 @@ obj/%.o: src/%.c
 	@$(CC) $(FLAGS) $(HEADER) -c $< -o $@
 
 $(NAME): $(OBJS)
-	@echo "$(COLOR)Creating object files and the executable. ($(NAME))$(NOCOLOR)"
 	@make -C libft
 	@$(CC) $(FLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+	@echo "$(COLOR)Creating object files and the executable. ($(NAME))$(NOCOLOR)"
 
 $(NAME_BONUS): $(OBJS_BONUS)
-	@echo "$(COLOR)Creating bonus object files and the executable. ($(NAME_BONUS))$(NOCOLOR)"
 	@make -C libft
 	@$(CC) $(FLAGS) $(OBJS_BONUS) $(LIBFT) -o $(NAME_BONUS)
+	@echo "$(COLOR)Creating bonus object files and the executable. ($(NAME_BONUS))$(NOCOLOR)"
 
 clean:
 	@echo "$(COLOR)Removing object files.$(NOCOLOR)"
